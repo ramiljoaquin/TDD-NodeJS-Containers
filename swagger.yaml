@@ -2,14 +2,8 @@
 swagger: '2.0'
 info:
   description: >-
-    This is a microservice that handles currency exchange rate data for Bee Travel
+    This is a microservice that handles currency exchange rate data
   version: 1.0.0
-  title: Bee Travel Currency Data Service
-  contact:
-    email: grant.steinfeld@ibm.com
-  license:
-    name: Apache 2.0
-    url: 'https://github.com/bee-travels/bee-travels/blob/master/LICENSE'
 host: 'localhost:4001'
 basePath: /api/v1
 tags:
