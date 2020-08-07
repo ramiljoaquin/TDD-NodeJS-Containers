@@ -1,4 +1,4 @@
-# Currency Exchange Microservice - Proof of Concept of steps of test-driven developmentNode.js
+# Currency Exchange Microservice - Proof of Concept of test-driven development
 
 This application was created using test-driven development(TDD) methodologies, in particular the Red-Green-Refactor or test-first approach. No code was written without **_first_** writing an associated unit test.
 
