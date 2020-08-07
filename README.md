@@ -1,19 +1,60 @@
-# Currency Exchange - Best Practices building a world class Node.js microservice
-
-This code pattern shows you how to create a world class currency conversion microservice in Node.js. This code pattern is a microservice
-
-This pattern showcases modern Node.js development by using modern JavaScript and popular `npm` libraries, which are listed in the [Anatomy of this Application](#anatomy-of-this-application) section at the bottom of this page.
+# Currency Exchange Microservice - Proof of Concept of steps of test-driven developmentNode.js
 
 This application was created using test-driven development(TDD) methodologies, in particular the Red-Green-Refactor or test-first approach. No code was written without **_first_** writing an associated unit test.
 
 Code that has unit tests is regarded as more complete and accurate. The unit tests function as a means to clearly understand the application. Requirements for the application translate into tests, so examining the tests gives you an idea about what the application does, and it also shows how to use the code. For our unit tests we use [Jest](https://jestjs.io/), a JavaScript unit-test framework testing library that works well with TDD.
 
-## After following this code pattern, you will understand how to:
+What is test-driven development?
+Test-driven development reverses traditional development and testing. So, instead of writing your code first and then retroactively fitting a test to validate the piece of code you just wrote, test-driven development dictates that you write the test first and then implement code changes until your code passes the test you already wrote.
 
-- Design and create a Node.js microservice with a REST interface that has a swagger test harness where you can manually inspect, discover, and run the various API endpoints.
-- Use and run this simple microservice.
-- Use the code base as a reference architecture and toolchain to create your own Node.js microservices.
-- Deploy and run this microservice on Kubernetes.
+In TDD, you write your unit test first, watch it fail, and then implement code changes until the test passes. Sounds backwards, right? But the code you produce when you use this testing methodology is cleaner and less prone to breaking in the long run.
+
+A unit test is simply a test that covers a small portion of logic, like an algorithm, for example. Unit tests should be deterministic. When I say “deterministic” I mean that unit tests should never have side-effects like calls to external APIs that deliver random or changing data. Instead, you’d use mock data in place of data that could potentially change over time.
+
+Five steps of test-driven development
+There are 5 steps in the TDD flow:
+
+Read, understand, and process the feature or bug request.
+Translate the requirement by writing a unit test. If you have hot reloading set up, the unit test will run and fail as no code is implemented yet.
+Write and implement the code that fulfills the requirement. Run all tests and they should pass, if not repeat this step.
+Clean up your code by refactoring.
+Rinse, lather and repeat.
+Figure 1 shows these steps and their agile, cyclical, and iterative nature:
+
+![Red green refactoring in TDD](doc/source/images/tdd-red-green-refactoring.png)
+
+This workflow is sometimes called Red-Green-Refactoring, which comes from the status of the tests within the cycle.
+
+The red phase indicates that code does not work.
+The green phase indicates that everything is working, but not necessary in the most optimal way.
+The blue phase indicates that the tester is refactoring the code, but is confident their code is covered with tests which gives the tester confidence to change and improve our code.
+Test-driven development and CI/CD
+Continuous integration(CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early. By integrating regularly, you can detect errors quickly, and locate them more easily.
+The unit tests that come out of TDD are also an integral part of the continuous integration/continuous delivery (CI/CD) process. TDD relates specifically to unit tests and continuous integration/continuous delivery pipelines like CircleCI, GoCD, or Travis CI which run all the unit tests at commit time.
+
+The tests are run in the deployment pipeline. If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the build is not broken.
+
+Set up your tools, toolchain, and IDE first
+In order to do test-driven development, you need to setup your tools, toolchain, and IDE first. In our [code pattern], we are developing a Node.js example, so here are the key tools we set up:
+
+nvm (Node Version Manager) for Node.js and NPM: NVM allows you to run the Node.js version you want and change it without affecting the system node.
+npm libraries for development:
+Jest for unit tests
+ESLint for linting
+Prettier for formatting
+Husky and lint-staged for precommit Git hooks
+How to write unit tests that fail
+There are a couple different ways to write unit tests that fail.
+
+Write a test that references a function in the code that doesn’t exist yet. This will cause the test to fail with a non-found error (for instance, a 404 error).
+
+Alter the assert statement to make it fail. An assert statement says what value the code being tested is expected to return; this kind of statement is a key aspect of a unit test. The assert statement should reflect the feature or bug fix request.
+
+So, to make it fail, you would write an asset statement that returns an unexpected value in, say, a data structure you want to enrich. For example, your JSON returns a person’s name, but your new requirement says to include the person’s cellphone number. You would first write the assert statement to only include the person’s name, which would cause it to fail. Then you would add the code to include the person phone number as well.
+
+Or, in real life coding: Your assert statement could be: assert actualResult == {‘track’:‘foo fighters’}. Once the code (function) is hooked up, the 404 goes away, but the actual result could be an empty object like {}. You then hard code the result in the function to be {‘track’:‘foo fighters’}.
+
+The test will now pass (Green!). The code is obviously just a sub for now, but you can get the basic understanding. The test is wired up to a point in the code correctly. From there you can implement actual business logic, for example, read a file/db/call an external API.
 
 ## Architecture
 
