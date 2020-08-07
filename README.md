@@ -4,7 +4,8 @@ This application was created using test-driven development(TDD) methodologies, i
 
 Code that has unit tests is regarded as more complete and accurate. The unit tests function as a means to clearly understand the application. Requirements for the application translate into tests, so examining the tests gives you an idea about what the application does, and it also shows how to use the code. For our unit tests we use [Jest](https://jestjs.io/), a JavaScript unit-test framework testing library that works well with TDD.
 
-What is test-driven development?
+## What is test-driven development?
+
 Test-driven development reverses traditional development and testing. So, instead of writing your code first and then retroactively fitting a test to validate the piece of code you just wrote, test-driven development dictates that you write the test first and then implement code changes until your code passes the test you already wrote.
 
 In TDD, you write your unit test first, watch it fail, and then implement code changes until the test passes. Sounds backwards, right? But the code you produce when you use this testing methodology is cleaner and less prone to breaking in the long run.
@@ -14,41 +15,49 @@ A unit test is simply a test that covers a small portion of logic, like an algor
 Five steps of test-driven development
 There are 5 steps in the TDD flow:
 
-Read, understand, and process the feature or bug request.
-Translate the requirement by writing a unit test. If you have hot reloading set up, the unit test will run and fail as no code is implemented yet.
-Write and implement the code that fulfills the requirement. Run all tests and they should pass, if not repeat this step.
-Clean up your code by refactoring.
-Rinse, lather and repeat.
+1. Read, understand, and process the feature or bug request.
+2. Translate the requirement by writing a unit test. If you have hot reloading set up, the unit test will run and fail as no code is implemented yet.
+3. Write and implement the code that fulfills the requirement. Run all tests and they should pass, if not repeat this step.
+4. Clean up your code by refactoring.
+5. Rinse, lather and repeat.
+
 Figure 1 shows these steps and their agile, cyclical, and iterative nature:
 
 ![Red green refactoring in TDD](doc/source/images/tdd-red-green-refactoring.png)
 
 This workflow is sometimes called Red-Green-Refactoring, which comes from the status of the tests within the cycle.
 
-The red phase indicates that code does not work.
-The green phase indicates that everything is working, but not necessary in the most optimal way.
-The blue phase indicates that the tester is refactoring the code, but is confident their code is covered with tests which gives the tester confidence to change and improve our code.
-Test-driven development and CI/CD
+- The red phase indicates that code does not work.
+- The green phase indicates that everything is working, but not necessary in the most optimal way.
+- The blue phase indicates that the tester is refactoring the code, but is confident their code is covered with tests which gives the tester confidence to change and improve our code.
+
+## Test-driven development and CI/CD
+
 Continuous integration(CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early. By integrating regularly, you can detect errors quickly, and locate them more easily.
+
 The unit tests that come out of TDD are also an integral part of the continuous integration/continuous delivery (CI/CD) process. TDD relates specifically to unit tests and continuous integration/continuous delivery pipelines like CircleCI, GoCD, or Travis CI which run all the unit tests at commit time.
 
 The tests are run in the deployment pipeline. If all tests pass, integration and deployment will happen. On the other hand, if any tests fail, the process is halted, thus ensuring the build is not broken.
 
-Set up your tools, toolchain, and IDE first
+## Set up your tools, toolchain, and IDE first
+
 In order to do test-driven development, you need to setup your tools, toolchain, and IDE first. In our [code pattern], we are developing a Node.js example, so here are the key tools we set up:
 
-nvm (Node Version Manager) for Node.js and NPM: NVM allows you to run the Node.js version you want and change it without affecting the system node.
-npm libraries for development:
-Jest for unit tests
-ESLint for linting
-Prettier for formatting
-Husky and lint-staged for precommit Git hooks
-How to write unit tests that fail
+- nvm (Node Version Manager) for Node.js and NPM: NVM allows you to run the Node.js version you want and change it without affecting the system node.
+- npm libraries for development:
+
+1. Jest for unit tests
+2. ESLint for linting
+3. Prettier for formatting
+4. Husky and lint-staged for precommit Git hooks
+
+## How to write unit tests that fail
+
 There are a couple different ways to write unit tests that fail.
 
-Write a test that references a function in the code that doesn’t exist yet. This will cause the test to fail with a non-found error (for instance, a 404 error).
+1. Write a test that references a function in the code that doesn’t exist yet. This will cause the test to fail with a non-found error (for instance, a 404 error).
 
-Alter the assert statement to make it fail. An assert statement says what value the code being tested is expected to return; this kind of statement is a key aspect of a unit test. The assert statement should reflect the feature or bug fix request.
+2. Alter the assert statement to make it fail. An assert statement says what value the code being tested is expected to return; this kind of statement is a key aspect of a unit test. The assert statement should reflect the feature or bug fix request.
 
 So, to make it fail, you would write an asset statement that returns an unexpected value in, say, a data structure you want to enrich. For example, your JSON returns a person’s name, but your new requirement says to include the person’s cellphone number. You would first write the assert statement to only include the person’s name, which would cause it to fail. Then you would add the code to include the person phone number as well.
 
