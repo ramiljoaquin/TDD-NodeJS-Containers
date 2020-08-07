@@ -19,7 +19,7 @@ Code that has unit tests is regarded as more complete and accurate. The unit tes
 
 This flow is for the runtime of the currency conversion microservice.
 
-![run time flow](doc/source/images/architecture.jpg)
+![run time flow](doc/source/images/architecture.png)
 
 **_Figure 1. Production flow_**
 
